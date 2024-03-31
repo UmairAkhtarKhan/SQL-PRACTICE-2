@@ -1,0 +1,94 @@
+https://localhost:5500/em
+fist ddl command
+1=create
+how to create user
+create user ali identified by ali;
+we face error so we write below command
+alter session set "_oracle_script"=true;
+now session altered and we write first command then our user is created
+now we connect the user 
+conn
+enter user_name:ali
+enter user_password:1234
+it will again give error
+ORA-01045: user UMER lacks CREATE SESSION privilege; logon denied
+now i will again connect to the admin user or system user and give garnt or access to our user
+conn
+enter user_name:system
+enter user_password:1234
+grant connect to ali;
+now i give access to new user
+now  i can connect to new user
+how to drop user
+go in system  and run command (drop user cascade;)
+we face error then (alter session set "_oracle_script"=true;)
+then again (drop user username cascade;) now the user will droped
+show user and go in that in which user you want to create table
+create table employee (id number(10),name varchar2(20),address varchar2(30));
+you face error then go in again system write command alter session set "_oracle_script"=true; and the write command grant all privileges to academy;
+and then go in user in which user you want to create table
+create table employee (id number(10),name varchar2(20),address varchar2(30));
+The INSERT INTO statement is used to insert new records in a table.
+below 1st way to insert record in table
+1=(insert into student (id,Name,Course,Contact,Address)Values(11,'Yasir Hameed','DBA',03340008762,'Haripur');)
+2=Insert Data Only in Specified Columns (insert into student(id,name,course)values(12,'Sohaib Khan','DBA');)
+(insert into student (contact,address)values(03450000678,'Attock');)
+3=
+
+We will have to use the IS NULL and IS NOT NULL operators instead. to check the the null values in table
+The IS NULL operator is used to test for empty values (NULL values),(select * from student where address is null;)
+IS NOT NULL operator is used to test for non-empty values (NOT NULL values).(select *from student where address is not null;)
+The UPDATE statement is used to modify the existing records in a table.
+Be careful when updating records in a table! Notice the WHERE clause in the UPDATE statement. 
+The WHERE clause specifies which record(s) that should be updated. If you omit the WHERE clause,
+ all records in the table will be updated!
+Be careful when updating records. If you omit the WHERE clause, ALL records will be updated!
+(update student set Course='DBA',Address='Attock' where id=13;),(update student set contact=03450909098 where id=13;)
+
+for retreving whole data from table
+select *from employee;
+The DELETE statement is used to delete existing records in a table.
+for deleteing row or record in table(delete employee where id=5;),(delete student where id=12;),(delete student where address='Attock';)
+delete all rows in a table without deleting the table.(DELETE FROM table_name;)
+for deleting whole table we use drop command(drop table tablename),but drop command delete the table with records
+if you want to set the displaying table structure use this command(set line 100) youn can change any thing instead of 100
+find name and course,contact  from havelian (select name,course,contact from student where address='Havelian';)
+if you want to permanent save the table or changes you did in table(commit;)
+a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values 
+COMMAND IS(select distinct address from student;).
+By using the DISTINCT keyword in a function called COUNT is used for counting, 
+we can return the number of different addrresses(select count(distinct address) from student;).
+The WHERE clause is used to filter records,it retrevie those who full fll the condition(select name from student where id=1;)
+WHERE clause is not only used in SELECT statements, it is also used in UPDATE, DELETE, etc.!
+we can use other operators with where clause(>,<,>=,<=,<>,in,between,like)
+The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+The BETWEEN operator is inclusive: begin and end values are included. (select name,course from student where id between 1 and 5; )
+To display the  outside the range of the previous example, use NOT BETWEEN:(select name,course from student where id not between 2 and 5;)
+we can use between with text values (select name from student where address between 'Havelian'and 'Wahcantt';) 
+we can use not between with text values (select name from student where address not between 'Havelian'and 'Wahcantt';) 
+The ORDER BY keyword is used to sort the result-set in ascending or descending order
+The ORDER BY keyword sorts the records in ascending order by default Ascending order, use the ASC keyword . To sort the records in descending order, use the DESC keyword.
+command (select name from student order by id desc;),(select course from student order by address desc;),(select *from student order by id desc;)
+ORDER BY Several Columns (select name from student order by address,course desc;)it first takes order of adress if any one have same address takes course for order
+(select *from student order by address ,course desc;)
+Using Both ASC and DESC (select * from student order by id asc,name desc;)
+AND Operator WHERE clause can contain one or many AND operators.and operator is used to filter the record based on more than one condition
+AND operator gives result when all conditions are true
+(select name ,course,address from student where id>3 and id<7 and address='Haripur';)
+OR Operator WHERE clause can contain one or many or operators,or operator is used to filter the record based on more than one condition
+OR operator gives result when  condition is true from given cndiitions
+(Select name from student where id<5 or course='Cyber security'or address='Havelian';)
+Combining and ,or operators :
+(Select name from student where id<5 and (address='Haripur' or Course='Cyber Security');)
+(Select name from student where id<5 or (address='Haripur' and Course='Cyber Security');)
+The NOT operator is used in combination with other operators to give the opposite result, also called the negative result.
+(select *from student where not id>5;),(select name from student where not name ='Umer Nazqat';)
+
+
+
+
+
+
+
+
+
